@@ -431,6 +431,9 @@ async function chargerToutesLesOffres() {
 let categorieActuelle = null;
 let offresData = {};
 let motRecherche = '';
+let pageActuelle = 1;
+let itemsParPage = 24;
+let offresFiltrees = []; // Stocke toutes les offres filtrées (recherche + catégorie)
 
 // Fonction pour initialiser le dropdown des catégories
 function initialiserDropdownCategories() {
@@ -452,6 +455,7 @@ function initialiserDropdownCategories() {
     // Événement de changement de catégorie
     categorySelect.addEventListener('change', (e) => {
         categorieActuelle = e.target.value || null;
+        pageActuelle = 1; // Retour à la première page lors du changement de catégorie
         afficherOffres();
     });
 }
@@ -463,6 +467,7 @@ function initialiserRecherche() {
     
     function effectuerRecherche() {
         motRecherche = searchInput.value.toLowerCase().trim();
+        pageActuelle = 1; // Retour à la première page lors d'une nouvelle recherche
         afficherOffres();
     }
     
@@ -480,7 +485,130 @@ function initialiserRecherche() {
     });
 }
 
-// Fonction pour afficher les offres avec recherche et filtrage
+// Fonction pour initialiser la pagination
+function initialiserPagination() {
+    const itemsSelect = document.getElementById('items-select');
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+    
+    // Gestion du changement du nombre d'éléments par page
+    itemsSelect.addEventListener('change', (e) => {
+        itemsParPage = parseInt(e.target.value);
+        pageActuelle = 1; // Retour à la première page
+        afficherOffres();
+    });
+    
+    // Gestion des boutons précédent/suivant
+    prevButton.addEventListener('click', () => {
+        if (pageActuelle > 1) {
+            pageActuelle--;
+            afficherOffres();
+            // Scroll vers le haut des offres
+            document.getElementById('offres-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    
+    nextButton.addEventListener('click', () => {
+        const totalPages = Math.ceil(offresFiltrees.length / itemsParPage);
+        if (pageActuelle < totalPages) {
+            pageActuelle++;
+            afficherOffres();
+            // Scroll vers le haut des offres
+            document.getElementById('offres-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+// Fonction pour créer les numéros de page
+function creerNumerosPagination(pageActuelle, totalPages) {
+    const pageNumbers = document.getElementById('page-numbers');
+    pageNumbers.innerHTML = '';
+    
+    if (totalPages <= 1) return;
+    
+    const maxPagesVisibles = 7;
+    let startPage = Math.max(1, pageActuelle - Math.floor(maxPagesVisibles / 2));
+    let endPage = Math.min(totalPages, startPage + maxPagesVisibles - 1);
+    
+    // Ajuster le début si on est près de la fin
+    if (endPage - startPage < maxPagesVisibles - 1) {
+        startPage = Math.max(1, endPage - maxPagesVisibles + 1);
+    }
+    
+    // Première page et ellipses si nécessaire
+    if (startPage > 1) {
+        ajouterBoutonPage(1, pageActuelle);
+        if (startPage > 2) {
+            ajouterEllipses();
+        }
+    }
+    
+    // Pages visibles
+    for (let i = startPage; i <= endPage; i++) {
+        ajouterBoutonPage(i, pageActuelle);
+    }
+    
+    // Ellipses et dernière page si nécessaire
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            ajouterEllipses();
+        }
+        ajouterBoutonPage(totalPages, pageActuelle);
+    }
+}
+
+// Fonction pour ajouter un bouton de page
+function ajouterBoutonPage(numeroPage, pageActuelle) {
+    const pageNumbers = document.getElementById('page-numbers');
+    const button = document.createElement('div');
+    button.className = `page-number ${numeroPage === pageActuelle ? 'active' : ''}`;
+    button.textContent = numeroPage;
+    button.addEventListener('click', () => {
+        if (numeroPage !== pageActuelle) {
+            pageActuelle = numeroPage;
+            window.pageActuelle = pageActuelle; // Mettre à jour la variable globale
+            afficherOffres();
+            // Scroll vers le haut des offres
+            document.getElementById('offres-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    pageNumbers.appendChild(button);
+}
+
+// Fonction pour ajouter des ellipses
+function ajouterEllipses() {
+    const pageNumbers = document.getElementById('page-numbers');
+    const ellipses = document.createElement('div');
+    ellipses.className = 'page-ellipsis';
+    ellipses.textContent = '...';
+    pageNumbers.appendChild(ellipses);
+}
+
+// Fonction pour mettre à jour les contrôles de pagination
+function mettreAJourControllesPagination() {
+    const totalPages = Math.ceil(offresFiltrees.length / itemsParPage);
+    const prevButton = document.getElementById('prev-page');
+    const nextButton = document.getElementById('next-page');
+    const paginationInfo = document.getElementById('pagination-info');
+    
+    // Mettre à jour les boutons
+    prevButton.disabled = pageActuelle <= 1;
+    nextButton.disabled = pageActuelle >= totalPages;
+    
+    // Mettre à jour les informations
+    if (offresFiltrees.length > 0) {
+        const debut = (pageActuelle - 1) * itemsParPage + 1;
+        const fin = Math.min(pageActuelle * itemsParPage, offresFiltrees.length);
+        paginationInfo.textContent = `Affichage de ${debut} à ${fin} sur ${offresFiltrees.length} offres`;
+    } else {
+        paginationInfo.textContent = 'Aucune offre à afficher';
+    }
+    
+    // Créer les numéros de page
+    creerNumerosPagination(pageActuelle, totalPages);
+}
+
+// Fonction pour afficher les offres avec recherche, filtrage et pagination
 async function afficherOffres() {
     const offresContainer = document.getElementById('offres-container');
     const offersCountElement = document.getElementById('offers-count') || document.querySelector('.offers-count');
@@ -518,7 +646,7 @@ async function afficherOffres() {
             });
         }
 
-        // Filtre spécial : Prioriser les offres avec plus de 25% de réduction (comme l'exemple Lenovo)
+        // Filtre spécial : Prioriser les offres avec plus de 25% de réduction
         const offresForteReduction = filtrerParReduction(offresAAfficher, 25);
         const autresOffres = offresAAfficher.filter(offre => {
             const reduction = extrairePourcentageReduction(offre.titre + ' ' + offre.description + ' ' + offre.prix);
@@ -526,9 +654,9 @@ async function afficherOffres() {
         });
 
         // Combiner : d'abord les fortes réductions, puis les autres
-        offresAAfficher = [...offresForteReduction, ...autresOffres];
+        offresFiltrees = [...offresForteReduction, ...autresOffres];
 
-        if (offresAAfficher.length === 0) {
+        if (offresFiltrees.length === 0) {
             const messageVide = motRecherche ? 
                 `Aucune offre trouvée pour "${motRecherche}"` : 
                 'Aucune offre trouvée dans cette catégorie.';
@@ -536,20 +664,39 @@ async function afficherOffres() {
             if (offersCountElement) {
                 offersCountElement.textContent = '';
             }
+            // Cacher les contrôles de pagination
+            document.querySelector('.pagination-container').style.display = 'none';
             return;
         }
 
-        // Afficher le nombre de résultats
-        const nombreResultats = offresAAfficher.length;
-        if (offersCountElement) {
-            offersCountElement.textContent = `${nombreResultats} offre(s) trouvée(s)`;
+        // Afficher les contrôles de pagination
+        document.querySelector('.pagination-container').style.display = 'flex';
+
+        // Calculer la pagination
+        const totalPages = Math.ceil(offresFiltrees.length / itemsParPage);
+        const debut = (pageActuelle - 1) * itemsParPage;
+        const fin = debut + itemsParPage;
+        const offresPage = offresFiltrees.slice(debut, fin);
+
+        // Vérifier que la page actuelle est valide
+        if (pageActuelle > totalPages && totalPages > 0) {
+            pageActuelle = 1;
+            return afficherOffres(); // Réafficher avec la première page
         }
 
-        // Afficher les résultats
-        offresAAfficher.forEach(offre => {
+        // Afficher le nombre de résultats
+        if (offersCountElement) {
+            offersCountElement.textContent = `${offresFiltrees.length} offre(s) trouvée(s)`;
+        }
+
+        // Afficher les offres de la page actuelle
+        offresPage.forEach(offre => {
             const offreElement = creerElementOffre(offre);
             offresContainer.appendChild(offreElement);
         });
+
+        // Mettre à jour les contrôles de pagination
+        mettreAJourControllesPagination();
 
     } catch (error) {
         console.error('Erreur lors de l\'affichage des offres:', error);
@@ -557,6 +704,8 @@ async function afficherOffres() {
         if (offersCountElement) {
             offersCountElement.textContent = '';
         }
+        // Cacher les contrôles de pagination en cas d'erreur
+        document.querySelector('.pagination-container').style.display = 'none';
     }
 }
 
@@ -612,5 +761,6 @@ function creerElementOffre(offre) {
 // Initialisation de l'application
 document.addEventListener('DOMContentLoaded', function() {
     initialiserRecherche();
+    initialiserPagination();
     afficherOffres();
 });

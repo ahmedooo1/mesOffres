@@ -28,6 +28,25 @@
         <div id="offres-container" class="offers-grid">
             <!-- Les offres seront insérées ici par JavaScript -->
         </div>
+        <div class="pagination-container">
+            <div class="pagination-info">
+                <span id="pagination-info"></span>
+            </div>
+            <div class="pagination-controls">
+                <button id="prev-page" class="pagination-btn">← Précédent</button>
+                <div id="page-numbers" class="page-numbers"></div>
+                <button id="next-page" class="pagination-btn">Suivant →</button>
+            </div>
+            <div class="items-per-page">
+                <label for="items-select">Éléments par page :</label>
+                <select id="items-select" class="items-select">
+                    <option value="12">12</option>
+                    <option value="24" selected>24</option>
+                    <option value="48">48</option>
+                    <option value="96">96</option>
+                </select>
+            </div>
+        </div>
     </div>
     
     <script src="script.js"></script>
