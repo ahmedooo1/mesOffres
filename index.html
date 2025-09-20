@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Offres</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Offres du moment</h1>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Rechercher une offre..." />
+                <button id="search-button">🔍</button>
+            </div>
+            <div class="category-container">
+                <label for="category-select">Catégorie :</label>
+                <select id="category-select" class="category-select">
+                    <option value="">Toutes les catégories</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div id="offers-count" class="offers-count"></div>
+        <div id="offres-container" class="offers-grid">
+            <!-- Les offres seront insérées ici par JavaScript -->
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
