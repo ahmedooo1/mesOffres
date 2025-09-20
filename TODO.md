@@ -17,6 +17,8 @@
 - [x] Fix price extraction for GBP (£) and EUR (€) currencies
 - [x] Fix categorization to prevent food items from appearing in Téléphonie/Mobile category
 - [x] Expand mobile phone plans selection (8 popular French plans)
+- [x] Set up GitHub Pages deployment with automatic GitHub Actions workflow
+- [x] Add comprehensive documentation and README.md
 
 ## Next Steps
 - [ ] Test the page functionality in browser with real RSS feeds
@@ -27,6 +29,13 @@
 - [ ] Consider adding more RSS sources (French deal sites)
 - [ ] Add manual refresh button for updating deals
 - [ ] Consider adding more mobile operators and plans
+- [x] Deploy website to GitHub Pages for public access
+
+## Deployment
+The website is now live at: https://ahmedooo1.github.io/mesOffres/
+- Automatic deployment via GitHub Actions
+- Deploys on every push to main branch
+- Modern responsive interface with dark theme
 
 ## Features Implemented
 - Real-time deal detection from RSS feeds (Dealabs, HotUKDeals)
@@ -39,3 +48,5 @@
 - Mobile phone plans with expiration dates and color-coded warnings
 - Static data for major French mobile operators (Free, SFR, Orange, Bouygues)
 - Improved categorization accuracy to prevent misclassification
+- **GitHub Pages deployment with automatic CI/CD**
+- **Comprehensive documentation and project README**
