@@ -666,7 +666,7 @@ main {
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    background-color: white;
+    /* background-color: white; */
     cursor: pointer;
     outline: none;
     min-width: 200px;
