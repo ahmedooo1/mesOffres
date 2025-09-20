@@ -835,3 +835,224 @@ main {
         text-align: center;
     }
 }
+
+/* Footer Styles */
+.footer {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0,246,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,61,146,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(155,81,224,0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-brand h3 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-brand p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section li {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.footer-section li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-size: 0.8rem;
+}
+
+.footer-section li:hover {
+    color: rgba(255,255,255,0.9);
+    transform: translateX(2px);
+}
+
+.footer-section li strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copyright p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.footer-copyright p:first-child {
+    font-weight: 500;
+}
+
+.footer-copyright strong {
+    color: #ffffff;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-tech {
+    text-align: right;
+}
+
+.footer-tech p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.tech-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.tech-badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: rgba(255,255,255,0.8);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.tech-badge:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 2rem 1rem 1rem;
+    }
+    
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .footer-tech {
+        text-align: center;
+    }
+    
+    .tech-badges {
+        justify-content: center;
+    }
+    
+    .footer-brand h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .tech-badges {
+        gap: 0.25rem;
+    }
+    
+    .tech-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
