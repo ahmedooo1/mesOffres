@@ -8,27 +8,62 @@
 </head>
 <body>
     <div class="header">
-        <h1>Offres du moment</h1>
+        <div class="header-top">
+            <h1>Offres du moment</h1>
+            <button id="theme-toggle" class="theme-toggle" title="Basculer le thème">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
         <div class="search-container">
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Rechercher une offre..." />
                 <button id="search-button">🔍</button>
+                <button id="clear-search" class="clear-search" title="Effacer la recherche">×</button>
             </div>
-            <div class="category-container">
-                <label for="category-select">Catégorie :</label>
-                <select id="category-select" class="category-select">
-                    <option value="">Toutes les catégories</option>
-                </select>
+            <div class="filters-container">
+                <div class="category-container">
+                    <label for="category-select">Catégorie :</label>
+                    <select id="category-select" class="category-select">
+                        <option value="">Toutes les catégories</option>
+                    </select>
+                </div>
+                <div class="sort-container">
+                    <label for="sort-select">Trier par :</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="date">Plus récent</option>
+                        <option value="discount">Réduction</option>
+                        <option value="price-low">Prix croissant</option>
+                        <option value="price-high">Prix décroissant</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
     
     <div class="container">
-        <div id="offers-count" class="offers-count"></div>
+        <div class="controls-bar">
+            <div id="offers-count" class="offers-count"></div>
+            <div class="pagination-controls">
+                <select id="items-per-page" class="items-per-page-select">
+                    <option value="12">12 par page</option>
+                    <option value="24" selected>24 par page</option>
+                    <option value="48">48 par page</option>
+                    <option value="96">96 par page</option>
+                </select>
+            </div>
+        </div>
         <div id="offres-container" class="offers-grid">
             <!-- Les offres seront insérées ici par JavaScript -->
         </div>
+        <div id="pagination" class="pagination">
+            <!-- La pagination sera générée par JavaScript -->
+        </div>
     </div>
+    
+    <!-- Floating scroll to top button -->
+    <button id="scroll-to-top" class="scroll-to-top" title="Retour en haut">
+        <span>↑</span>
+    </button>
     
     <script src="script.js"></script>
 </body>

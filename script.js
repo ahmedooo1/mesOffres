@@ -354,6 +354,134 @@ function determinerCategorie(texte) {
     return "Divers";
 }
 
+// Mock data for demonstration when RSS feeds are blocked
+const mockOffres = [
+    {
+        titre: "MacBook Air M2 13\" - 256GB SSD",
+        description: "Ordinateur portable ultra-léger avec puce M2 d'Apple, 8GB RAM, écran Retina 13.6\"",
+        prix: "€1,199.99",
+        vendeur: "Apple Store",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/007bff/ffffff?text=MacBook+Air",
+        source: "Dealabs",
+        categorie: "Électronique",
+        date: new Date(2024, 0, 15)
+    },
+    {
+        titre: "Samsung Galaxy S24 Ultra - 512GB",
+        description: "Smartphone Android avec S Pen, écran 6.8\" Dynamic AMOLED, caméra 200MP",
+        prix: "€1,449.99",
+        vendeur: "Samsung",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/28a745/ffffff?text=Galaxy+S24",
+        source: "HotUKDeals",
+        categorie: "Électronique",
+        date: new Date(2024, 0, 20)
+    },
+    {
+        titre: "Nike Air Jordan 1 Mid - 40% de réduction",
+        description: "Baskets emblématiques en cuir, coloris Black/White/Red, tailles disponibles 38-46",
+        prix: "€89.99",
+        vendeur: "Nike",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/dc3545/ffffff?text=Air+Jordan",
+        source: "Dealabs",
+        categorie: "Vêtements",
+        date: new Date(2024, 0, 18)
+    },
+    {
+        titre: "Sony WH-1000XM5 - Casque sans fil",
+        description: "Casque audio avec réduction de bruit active, autonomie 30h, qualité Hi-Res",
+        prix: "€349.99",
+        vendeur: "Sony",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/6f42c1/ffffff?text=Sony+Casque",
+        source: "Dealabs",
+        categorie: "Électronique",
+        date: new Date(2024, 0, 22)
+    },
+    {
+        titre: "Dyson V15 Detect - Aspirateur sans fil",
+        description: "Aspirateur sans fil avec détection laser, jusqu'à 60min d'autonomie",
+        prix: "€599.99",
+        vendeur: "Dyson",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/fd7e14/ffffff?text=Dyson+V15",
+        source: "HotUKDeals",
+        categorie: "Maison",
+        date: new Date(2024, 0, 19)
+    },
+    {
+        titre: "PlayStation 5 + Spider-Man 2",
+        description: "Console PS5 avec le jeu Spider-Man 2, manette DualSense incluse",
+        prix: "€549.99",
+        vendeur: "PlayStation",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/0d6efd/ffffff?text=PlayStation+5",
+        source: "Dealabs",
+        categorie: "Électronique",
+        date: new Date(2024, 0, 21)
+    },
+    {
+        titre: "Zara - Manteau d'hiver 50% off",
+        description: "Manteau long en laine mélangée, coupe élégante, plusieurs coloris disponibles",
+        prix: "€79.99",
+        vendeur: "Zara",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/198754/ffffff?text=Manteau+Zara",
+        source: "Dealabs",
+        categorie: "Vêtements",
+        date: new Date(2024, 0, 17)
+    },
+    {
+        titre: "Nintendo Switch OLED",
+        description: "Console portable avec écran OLED 7\", Joy-Con inclus, dock pour TV",
+        prix: "€329.99",
+        vendeur: "Nintendo",
+        lien: "#",
+        image: "https://via.placeholder.com/300x200/e01e37/ffffff?text=Switch+OLED",
+        source: "HotUKDeals",
+        categorie: "Électronique",
+        date: new Date(2024, 0, 16)
+    }
+];
+
+// Générer plus d'offres mock pour tester la pagination
+function genererOffresMock() {
+    const offresSupplementaires = [];
+    const titres = [
+        "iPhone 15 Pro Max", "Samsung TV 55\" QLED", "Adidas Ultraboost 22", "Kindle Oasis",
+        "Apple Watch Series 9", "Bose QuietComfort 45", "IKEA Canapé KIVIK", "Instant Pot Duo",
+        "GoPro Hero 12", "Microsoft Surface Pro 9", "Canon EOS R6", "Tesla Model 3 Accessories",
+        "Lego Architecture", "Fitbit Charge 5", "Nespresso Vertuo", "Ring Video Doorbell",
+        "AirPods Pro 2", "Dell XPS 13", "Nike Air Max 90", "KitchenAid Stand Mixer"
+    ];
+    
+    const categories = ["Électronique", "Vêtements", "Maison", "Sports & Loisirs", "Divers"];
+    const vendeurs = ["Amazon", "Apple", "Samsung", "Nike", "Adidas", "IKEA", "Best Buy", "Fnac"];
+    
+    for (let i = 0; i < 50; i++) {
+        const titre = titres[i % titres.length];
+        const categorie = categories[Math.floor(Math.random() * categories.length)];
+        const vendeur = vendeurs[Math.floor(Math.random() * vendeurs.length)];
+        const prix = `€${(Math.random() * 1000 + 50).toFixed(2)}`;
+        
+        offresSupplementaires.push({
+            titre: `${titre} ${i + 1}`,
+            description: `Description détaillée du produit ${titre} avec caractéristiques spéciales`,
+            prix: prix,
+            vendeur: vendeur,
+            lien: "#",
+            image: `https://via.placeholder.com/300x200/${Math.floor(Math.random()*16777215).toString(16)}/ffffff?text=${encodeURIComponent(titre)}`,
+            source: Math.random() > 0.5 ? "Dealabs" : "HotUKDeals",
+            categorie: categorie,
+            date: new Date(2024, 0, Math.floor(Math.random() * 30) + 1)
+        });
+    }
+    
+    return [...mockOffres, ...offresSupplementaires];
+}
+
 // Fonction pour charger toutes les offres
 async function chargerToutesLesOffres() {
     const maintenant = new Date();
@@ -380,6 +508,8 @@ async function chargerToutesLesOffres() {
         "Divers": []
     };
 
+    let totalOffresChargees = 0;
+
     // Charger depuis toutes les sources RSS avec délais
     let sourceIndex = 0;
     for (const [sourceId, source] of Object.entries(sourcesDeals)) {
@@ -401,10 +531,12 @@ async function chargerToutesLesOffres() {
                     deal.categorie = categorie;
                     deal.source = source.nom;
                     offresParCategorie[categorie].push(deal);
+                    totalOffresChargees++;
                 } else {
                     deal.categorie = "Divers";
                     deal.source = source.nom;
                     offresParCategorie["Divers"].push(deal);
+                    totalOffresChargees++;
                 }
             });
             
@@ -412,6 +544,21 @@ async function chargerToutesLesOffres() {
         } catch (error) {
             console.error(`Erreur chargement ${source.nom}:`, error);
         }
+    }
+
+    // Si aucune offre n'a été chargée depuis les RSS, utiliser les données mock
+    if (totalOffresChargees === 0) {
+        console.log("Aucune offre chargée depuis les RSS, utilisation des données de démonstration...");
+        const offresMock = genererOffresMock();
+        
+        offresMock.forEach(offre => {
+            const categorie = offre.categorie;
+            if (offresParCategorie[categorie]) {
+                offresParCategorie[categorie].push(offre);
+            } else {
+                offresParCategorie["Divers"].push(offre);
+            }
+        });
     }
 
     // Trier par date (plus récent en premier) et limiter à 75 par catégorie
@@ -431,61 +578,406 @@ async function chargerToutesLesOffres() {
 let categorieActuelle = null;
 let offresData = {};
 let motRecherche = '';
+let trierPar = 'date';
+let pageActuelle = 1;
+let elementsParPage = 24;
 
-// Fonction pour initialiser le dropdown des catégories
+// Enhanced loading state management
+let isLoading = false;
+
+// Performance monitoring
+let loadStartTime = 0;
+let offresAAfficher = [];
+
+// Gestion du thème
+function initialiserTheme() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('.theme-icon');
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        // Add loading animation to theme toggle
+        themeToggle.style.transform = 'scale(0.9) rotate(180deg)';
+        
+        setTimeout(() => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            themeIcon.textContent = isLight ? '☀️' : '🌙';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Add subtle transition effect
+            document.body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            // Reset theme toggle animation
+            themeToggle.style.transform = 'scale(1) rotate(0deg)';
+            
+            // Reset body transition after animation
+            setTimeout(() => {
+                document.body.style.transition = '';
+            }, 500);
+        }, 200);
+    });
+    
+    // Add pulse effect on hover
+    themeToggle.addEventListener('mouseenter', () => {
+        themeIcon.style.animation = 'pulse 0.6s infinite';
+    });
+    
+    themeToggle.addEventListener('mouseleave', () => {
+        themeIcon.style.animation = '';
+    });
+}
+
+// Fonction pour trier les offres
+function trierOffres(offres, critere) {
+    const offresCopie = [...offres];
+    
+    switch (critere) {
+        case 'date':
+            return offresCopie.sort((a, b) => (b.date || new Date()) - (a.date || new Date()));
+        case 'discount':
+            return offresCopie.sort((a, b) => {
+                const discountA = extrairePourcentageReduction(a.titre + ' ' + a.description + ' ' + a.prix);
+                const discountB = extrairePourcentageReduction(b.titre + ' ' + b.description + ' ' + b.prix);
+                return discountB - discountA;
+            });
+        case 'price-low':
+            return offresCopie.sort((a, b) => {
+                const priceA = extrairePrixNumerique(a.prix);
+                const priceB = extrairePrixNumerique(b.prix);
+                return priceA - priceB;
+            });
+        case 'price-high':
+            return offresCopie.sort((a, b) => {
+                const priceA = extrairePrixNumerique(a.prix);
+                const priceB = extrairePrixNumerique(b.prix);
+                return priceB - priceA;
+            });
+        default:
+            return offresCopie;
+    }
+}
+
+// Fonction pour extraire le prix numérique
+function extrairePrixNumerique(prixTexte) {
+    if (!prixTexte) return 0;
+    const match = prixTexte.match(/[\d,]+(?:\.\d{2})?/);
+    if (match) {
+        return parseFloat(match[0].replace(',', '.'));
+    }
+    return 0;
+}
+
+// Fonction pour créer la pagination
+function creerPagination(totalOffres, pageActuelle, elementsParPage) {
+    const totalPages = Math.ceil(totalOffres / elementsParPage);
+    const paginationContainer = document.getElementById('pagination');
+    
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+    
+    let paginationHTML = '';
+    
+    // Bouton précédent
+    paginationHTML += `<button class="pagination-btn" ${pageActuelle === 1 ? 'disabled' : ''} onclick="changerPage(${pageActuelle - 1})">‹</button>`;
+    
+    // Numéros de page
+    let debutPage = Math.max(1, pageActuelle - 2);
+    let finPage = Math.min(totalPages, pageActuelle + 2);
+    
+    if (debutPage > 1) {
+        paginationHTML += `<button class="pagination-btn" onclick="changerPage(1)">1</button>`;
+        if (debutPage > 2) {
+            paginationHTML += `<span class="pagination-info">...</span>`;
+        }
+    }
+    
+    for (let i = debutPage; i <= finPage; i++) {
+        paginationHTML += `<button class="pagination-btn ${i === pageActuelle ? 'active' : ''}" onclick="changerPage(${i})">${i}</button>`;
+    }
+    
+    if (finPage < totalPages) {
+        if (finPage < totalPages - 1) {
+            paginationHTML += `<span class="pagination-info">...</span>`;
+        }
+        paginationHTML += `<button class="pagination-btn" onclick="changerPage(${totalPages})">${totalPages}</button>`;
+    }
+    
+    // Bouton suivant
+    paginationHTML += `<button class="pagination-btn" ${pageActuelle === totalPages ? 'disabled' : ''} onclick="changerPage(${pageActuelle + 1})">›</button>`;
+    
+    // Info de pagination
+    const debut = (pageActuelle - 1) * elementsParPage + 1;
+    const fin = Math.min(pageActuelle * elementsParPage, totalOffres);
+    paginationHTML += `<span class="pagination-info">${debut}-${fin} sur ${totalOffres}</span>`;
+    
+    paginationContainer.innerHTML = paginationHTML;
+}
+
+// Fonction pour changer de page avec effets visuels améliorés
+function changerPage(nouvellePage) {
+    if (nouvellePage === pageActuelle || isLoading) return;
+    
+    const offresContainer = document.getElementById('offres-container');
+    const paginationBtns = document.querySelectorAll('.pagination-btn');
+    
+    // Ajouter feedback visuel
+    paginationBtns.forEach(btn => {
+        if (btn.textContent == nouvellePage) {
+            btn.style.transform = 'scale(1.1)';
+            btn.style.background = 'linear-gradient(135deg, #ff3d92 0%, #9b51e0 100%)';
+        }
+    });
+    
+    // Animation de sortie
+    offresContainer.style.transform = 'translateY(20px)';
+    offresContainer.style.opacity = '0.5';
+    
+    setTimeout(() => {
+        pageActuelle = nouvellePage;
+        afficherOffres();
+        
+        // Scroll fluide vers le haut
+        const header = document.querySelector('.header');
+        header.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Réinitialiser les styles des boutons
+        paginationBtns.forEach(btn => {
+            btn.style.transform = '';
+            btn.style.background = '';
+        });
+    }, 300);
+}
+
+// Enhanced function to initialize controls with visual feedback
+function initialiserControles() {
+    // Enhanced sort control
+    const sortSelect = document.getElementById('sort-select');
+    sortSelect.addEventListener('change', (e) => {
+        trierPar = e.target.value;
+        pageActuelle = 1;
+        
+        // Visual feedback
+        sortSelect.style.transform = 'scale(1.05)';
+        sortSelect.style.borderColor = 'rgba(155,81,224,0.8)';
+        
+        setTimeout(() => {
+            sortSelect.style.transform = 'scale(1)';
+            sortSelect.style.borderColor = '';
+            afficherOffres();
+        }, 200);
+    });
+    
+    // Enhanced items per page control
+    const itemsPerPageSelect = document.getElementById('items-per-page');
+    itemsPerPageSelect.addEventListener('change', (e) => {
+        elementsParPage = parseInt(e.target.value);
+        pageActuelle = 1;
+        
+        // Visual feedback
+        itemsPerPageSelect.style.transform = 'scale(1.05)';
+        itemsPerPageSelect.style.borderColor = 'rgba(155,81,224,0.8)';
+        
+        setTimeout(() => {
+            itemsPerPageSelect.style.transform = 'scale(1)';
+            itemsPerPageSelect.style.borderColor = '';
+            afficherOffres();
+        }, 200);
+    });
+    
+    // Add hover effects for all selects
+    [sortSelect, itemsPerPageSelect].forEach(select => {
+        select.addEventListener('mouseenter', () => {
+            if (!isLoading) {
+                select.style.transform = 'translateY(-1px)';
+                select.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            }
+        });
+        
+        select.addEventListener('mouseleave', () => {
+            select.style.transform = 'translateY(0)';
+            select.style.boxShadow = '';
+        });
+    });
+}
+
+// Enhanced function to initialize dropdown categories with visual feedback
 function initialiserDropdownCategories() {
     const categorySelect = document.getElementById('category-select');
     
     // Vider les options existantes (sauf "Toutes les catégories")
     categorySelect.innerHTML = '<option value="">Toutes les catégories</option>';
     
-    // Ajouter les catégories disponibles
+    // Ajouter les catégories disponibles avec compte d'éléments
     Object.keys(offresData).forEach(categorie => {
         if (offresData[categorie] && offresData[categorie].length > 0) {
             const option = document.createElement('option');
             option.value = categorie;
-            option.textContent = categorie;
+            option.textContent = `${categorie} (${offresData[categorie].length})`;
             categorySelect.appendChild(option);
         }
     });
     
-    // Événement de changement de catégorie
+    // Enhanced category change event with visual feedback
     categorySelect.addEventListener('change', (e) => {
+        const oldCategory = categorieActuelle;
         categorieActuelle = e.target.value || null;
-        afficherOffres();
+        pageActuelle = 1; // Reset à la première page
+        
+        // Visual feedback for category change
+        categorySelect.style.transform = 'scale(1.05)';
+        categorySelect.style.borderColor = 'rgba(0,246,255,0.8)';
+        
+        // Add category indicator
+        if (categorieActuelle) {
+            categorySelect.classList.add('filter-active');
+        } else {
+            categorySelect.classList.remove('filter-active');
+        }
+        
+        setTimeout(() => {
+            categorySelect.style.transform = 'scale(1)';
+            categorySelect.style.borderColor = '';
+            afficherOffres();
+        }, 200);
+    });
+    
+    // Enhanced hover effects
+    categorySelect.addEventListener('mouseenter', () => {
+        if (!isLoading) {
+            categorySelect.style.transform = 'translateY(-1px)';
+            categorySelect.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        }
+    });
+    
+    categorySelect.addEventListener('mouseleave', () => {
+        categorySelect.style.transform = 'translateY(0)';
+        categorySelect.style.boxShadow = '';
     });
 }
 
-// Fonction pour initialiser la recherche
+// Enhanced function to initialize search with better UX
 function initialiserRecherche() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+    const clearButton = document.getElementById('clear-search');
+    
+    // Add visual feedback for typing
+    let typingTimer;
     
     function effectuerRecherche() {
         motRecherche = searchInput.value.toLowerCase().trim();
-        afficherOffres();
+        pageActuelle = 1; // Reset à la première page
+        
+        // Show/hide clear button
+        if (motRecherche) {
+            clearButton.classList.add('visible');
+        } else {
+            clearButton.classList.remove('visible');
+        }
+        
+        // Add loading indicator to search box
+        searchButton.innerHTML = '⏳';
+        searchInput.style.borderColor = 'rgba(0,246,255,0.5)';
+        
+        setTimeout(() => {
+            afficherOffres();
+            searchButton.innerHTML = '🔍';
+            searchInput.style.borderColor = '';
+        }, 500);
     }
     
-    // Recherche en temps réel
-    searchInput.addEventListener('input', effectuerRecherche);
+    function effacerRecherche() {
+        searchInput.value = '';
+        motRecherche = '';
+        pageActuelle = 1;
+        clearButton.classList.remove('visible');
+        
+        // Animation d'effacement
+        searchInput.style.transform = 'scale(0.98)';
+        clearButton.style.transform = 'translateY(-50%) scale(0.8)';
+        
+        setTimeout(() => {
+            searchInput.style.transform = 'scale(1)';
+            clearButton.style.transform = 'translateY(-50%) scale(1)';
+            afficherOffres();
+            searchInput.focus();
+        }, 200);
+    }
     
-    // Recherche au clic
-    searchButton.addEventListener('click', effectuerRecherche);
+    // Enhanced real-time search with debouncing
+    searchInput.addEventListener('input', () => {
+        clearTimeout(typingTimer);
+        
+        // Visual feedback while typing
+        searchInput.style.borderColor = 'rgba(255,61,146,0.3)';
+        
+        typingTimer = setTimeout(() => {
+            effectuerRecherche();
+        }, 300); // Debounce for 300ms
+    });
     
-    // Recherche avec la touche Entrée
+    // Clear search button
+    clearButton.addEventListener('click', effacerRecherche);
+    
+    // Enhanced click handler
+    searchButton.addEventListener('click', () => {
+        searchButton.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            searchButton.style.transform = 'scale(1)';
+            effectuerRecherche();
+        }, 100);
+    });
+    
+    // Enhanced keyboard interaction
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            effectuerRecherche();
+            e.preventDefault();
+            searchInput.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                searchInput.style.transform = 'scale(1)';
+                effectuerRecherche();
+            }, 100);
         }
+    });
+    
+    // Focus and blur effects
+    searchInput.addEventListener('focus', () => {
+        searchInput.style.transform = 'scale(1.02)';
+        searchInput.style.boxShadow = '0 0 0 2px rgba(0,246,255,0.2)';
+    });
+    
+    searchInput.addEventListener('blur', () => {
+        searchInput.style.transform = 'scale(1)';
+        searchInput.style.boxShadow = '';
+        searchInput.style.borderColor = '';
     });
 }
 
-// Fonction pour afficher les offres avec recherche et filtrage
+// Enhanced function to display offers with better performance monitoring
 async function afficherOffres() {
     const offresContainer = document.getElementById('offres-container');
     const offersCountElement = document.getElementById('offers-count') || document.querySelector('.offers-count');
     
-    offresContainer.innerHTML = '<div class="loading">Chargement des offres...</div>';
+    // Start performance monitoring
+    loadStartTime = performance.now();
+    isLoading = true;
+    
+    // Enhanced loading with progress indication
+    offresContainer.innerHTML = creerSkeletonScreen();
+    if (offersCountElement) {
+        offersCountElement.innerHTML = '<span style="opacity: 0.6">🔄 Chargement...</span>';
+    }
 
     try {
         // Charger les offres si nécessaire
@@ -496,21 +988,21 @@ async function afficherOffres() {
 
         offresContainer.innerHTML = '';
 
-        let offresAAfficher = [];
+        let toutesLesOffres = [];
 
         // Filtrer par catégorie
         if (categorieActuelle) {
-            offresAAfficher = offresData[categorieActuelle] || [];
+            toutesLesOffres = offresData[categorieActuelle] || [];
         } else {
             // Afficher toutes les offres
             Object.values(offresData).forEach(offres => {
-                offresAAfficher = offresAAfficher.concat(offres);
+                toutesLesOffres = toutesLesOffres.concat(offres);
             });
         }
 
         // Filtrer par recherche
         if (motRecherche) {
-            offresAAfficher = offresAAfficher.filter(offre => {
+            toutesLesOffres = toutesLesOffres.filter(offre => {
                 return offre.titre.toLowerCase().includes(motRecherche) ||
                        offre.description.toLowerCase().includes(motRecherche) ||
                        offre.vendeur.toLowerCase().includes(motRecherche) ||
@@ -518,46 +1010,132 @@ async function afficherOffres() {
             });
         }
 
-        // Filtre spécial : Prioriser les offres avec plus de 25% de réduction (comme l'exemple Lenovo)
-        const offresForteReduction = filtrerParReduction(offresAAfficher, 25);
-        const autresOffres = offresAAfficher.filter(offre => {
+        // Filtre spécial : Prioriser les offres avec plus de 25% de réduction
+        const offresForteReduction = filtrerParReduction(toutesLesOffres, 25);
+        const autresOffres = toutesLesOffres.filter(offre => {
             const reduction = extrairePourcentageReduction(offre.titre + ' ' + offre.description + ' ' + offre.prix);
             return reduction < 25;
         });
 
         // Combiner : d'abord les fortes réductions, puis les autres
-        offresAAfficher = [...offresForteReduction, ...autresOffres];
+        toutesLesOffres = [...offresForteReduction, ...autresOffres];
 
-        if (offresAAfficher.length === 0) {
+        // Trier les offres
+        toutesLesOffres = trierOffres(toutesLesOffres, trierPar);
+
+        if (toutesLesOffres.length === 0) {
             const messageVide = motRecherche ? 
                 `Aucune offre trouvée pour "${motRecherche}"` : 
                 'Aucune offre trouvée dans cette catégorie.';
-            offresContainer.innerHTML = `<div class="loading">${messageVide}</div>`;
+            offresContainer.innerHTML = `
+                <div class="loading" style="padding: 4rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">${messageVide}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.6;">Essayez de modifier vos critères de recherche</div>
+                </div>
+            `;
             if (offersCountElement) {
                 offersCountElement.textContent = '';
             }
+            document.getElementById('pagination').innerHTML = '';
+            isLoading = false;
             return;
         }
 
-        // Afficher le nombre de résultats
-        const nombreResultats = offresAAfficher.length;
+        // Pagination
+        const totalOffres = toutesLesOffres.length;
+        const debutIndex = (pageActuelle - 1) * elementsParPage;
+        const finIndex = debutIndex + elementsParPage;
+        const offresAAfficher = toutesLesOffres.slice(debutIndex, finIndex);
+
+        // Calculate and display performance metrics
+        const loadTime = performance.now() - loadStartTime;
+        
+        // Enhanced results display with performance info
         if (offersCountElement) {
-            offersCountElement.textContent = `${nombreResultats} offre(s) trouvée(s)`;
+            const hotDeals = offresForteReduction.length;
+            offersCountElement.innerHTML = `
+                <span style="color: #00f6ff; font-weight: 600;">${totalOffres}</span> offre(s) trouvée(s)
+                ${hotDeals > 0 ? `<span style="color: #ff3d92; margin-left: 1rem;">🔥 ${hotDeals} promotions</span>` : ''}
+                <span style="opacity: 0.5; font-size: 0.8rem; margin-left: 1rem;">⚡ ${Math.round(loadTime)}ms</span>
+            `;
         }
 
-        // Afficher les résultats
-        offresAAfficher.forEach(offre => {
+        // Créer la pagination
+        creerPagination(totalOffres, pageActuelle, elementsParPage);
+
+        // Enhanced staggered animation
+        offresContainer.style.opacity = '0';
+        
+        offresAAfficher.forEach((offre, index) => {
             const offreElement = creerElementOffre(offre);
+            offreElement.style.animationDelay = `${index * 0.05}s`;
+            offreElement.classList.add('offer-enter');
             offresContainer.appendChild(offreElement);
         });
 
+        // Smooth appearance animation
+        setTimeout(() => {
+            offresContainer.style.opacity = '1';
+            isLoading = false;
+            
+            // Add success feedback
+            if (offersCountElement && totalOffres > 0) {
+                offersCountElement.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    offersCountElement.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, 100);
+
     } catch (error) {
         console.error('Erreur lors de l\'affichage des offres:', error);
-        offresContainer.innerHTML = '<div class="loading">Erreur lors du chargement des offres.</div>';
+        offresContainer.innerHTML = `
+            <div class="loading" style="color: #ff3d92;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                <div>Erreur lors du chargement des offres</div>
+                <button onclick="afficherOffres()" style="
+                    margin-top: 1rem; 
+                    padding: 0.5rem 1rem; 
+                    background: linear-gradient(135deg, #ff3d92, #9b51e0); 
+                    border: none; 
+                    border-radius: 8px; 
+                    color: white; 
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    🔄 Réessayer
+                </button>
+            </div>
+        `;
         if (offersCountElement) {
             offersCountElement.textContent = '';
         }
+        document.getElementById('pagination').innerHTML = '';
+        isLoading = false;
     }
+}
+
+// Function to create enhanced skeleton loading screen
+function creerSkeletonScreen() {
+    const skeletonCards = Array(6).fill().map((_, index) => `
+        <div class="skeleton-card" style="animation-delay: ${index * 0.1}s;">
+            <div class="skeleton-image skeleton"></div>
+            <div class="skeleton-content">
+                <div class="skeleton-title skeleton" style="height: 24px; margin-bottom: 12px; border-radius: 6px; width: 85%;"></div>
+                <div class="skeleton-title skeleton" style="height: 20px; margin-bottom: 16px; border-radius: 6px; width: 60%;"></div>
+                <div class="skeleton-description skeleton" style="height: 16px; margin-bottom: 8px; border-radius: 4px; width: 100%;"></div>
+                <div class="skeleton-description skeleton" style="height: 16px; margin-bottom: 8px; border-radius: 4px; width: 90%;"></div>
+                <div class="skeleton-description skeleton" style="height: 16px; margin-bottom: 20px; border-radius: 4px; width: 70%;"></div>
+                <div class="skeleton-price skeleton" style="height: 28px; width: 40%; margin-bottom: 16px; border-radius: 6px;"></div>
+                <div class="skeleton-meta skeleton" style="height: 14px; width: 80%; margin-bottom: 8px; border-radius: 4px;"></div>
+                <div class="skeleton-meta skeleton" style="height: 14px; width: 60%; margin-bottom: 20px; border-radius: 4px;"></div>
+                <div class="skeleton-button skeleton" style="height: 48px; width: 140px; border-radius: 16px;"></div>
+            </div>
+        </div>
+    `).join('');
+    
+    return `<div class="loading-skeleton">${skeletonCards}</div>`;
 }
 
 // Fonction pour créer un élément d'offre
@@ -602,15 +1180,106 @@ function creerElementOffre(offre) {
                 ${sourceHTML}
                 ${expirationHTML}
             </div>
-            <a href="${offre.lien}" target="_blank" class="offer-link">Voir l'offre</a>
+            <a href="${offre.lien}" target="_blank" class="offer-link">
+                <span>Voir l'offre</span>
+                <span class="offer-link-icon">→</span>
+            </a>
         </div>
     `;
+
+    // Enhanced hover effects with magnetic attraction
+    div.addEventListener('mouseenter', function(e) {
+        this.style.transform = 'translateY(-12px) scale(1.02)';
+        this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1), 0 0 80px rgba(0,246,255,0.1)';
+        
+        // Add magnetic effect to the link button
+        const link = this.querySelector('.offer-link');
+        if (link) {
+            link.style.transform = 'translateY(-2px) scale(1.05)';
+        }
+    });
+
+    div.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+        this.style.boxShadow = '';
+        
+        // Reset link button
+        const link = this.querySelector('.offer-link');
+        if (link) {
+            link.style.transform = 'translateY(0) scale(1)';
+        }
+    });
+
+    // Add click ripple effect
+    div.addEventListener('click', function(e) {
+        if (!e.target.closest('.offer-link')) {
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(0,246,255,0.3);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+                width: 50px;
+                height: 50px;
+                left: ${e.offsetX - 25}px;
+                top: ${e.offsetY - 25}px;
+            `;
+            
+            this.style.position = 'relative';
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        }
+    });
 
     return div;
 }
 
 // Initialisation de l'application
 document.addEventListener('DOMContentLoaded', function() {
+    initialiserTheme();
     initialiserRecherche();
+    initialiserControles();
+    initialiserScrollToTop();
     afficherOffres();
 });
+
+// Fonction pour initialiser le bouton scroll to top
+function initialiserScrollToTop() {
+    const scrollBtn = document.getElementById('scroll-to-top');
+    
+    // Afficher/masquer le bouton selon la position de scroll
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 300) {
+            scrollBtn.classList.add('visible');
+            
+            // Ajouter animation pulse si l'utilisateur a scrollé beaucoup
+            if (scrollTop > 1000) {
+                scrollBtn.classList.add('pulse');
+            }
+        } else {
+            scrollBtn.classList.remove('visible', 'pulse');
+        }
+    });
+    
+    // Gérer le clic sur le bouton
+    scrollBtn.addEventListener('click', () => {
+        // Animation du bouton
+        scrollBtn.style.transform = 'translateY(-3px) scale(0.9)';
+        
+        // Scroll fluide vers le haut
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Réinitialiser l'animation du bouton
+        setTimeout(() => {
+            scrollBtn.style.transform = '';
+        }, 200);
+    });
+}
