@@ -216,6 +216,34 @@ body {
     border: none;
 }
 
+.refresh-btn {
+    background: linear-gradient(135deg, #ff3d92 0%, #9b51e0 100%);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+}
+
+.refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255,61,146,0.3);
+    background: linear-gradient(135deg, #9b51e0 0%, #667eea 100%);
+}
+
+.refresh-btn:active {
+    transform: translateY(0);
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;

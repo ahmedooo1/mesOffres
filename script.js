@@ -1,135 +1,105 @@
-// Configuration des sources de deals (sources étendues + nouvelles catégories)
+// Configuration des sources de deals (optimisée pour rapidité avec plus de sites français)
 const sourcesDeals = {
-    // Sources principales très fiables
-    "dealabs_top": {
-        nom: "Dealabs (Top)",
-        rss: "https://www.dealabs.com/rss/top",
-        categorie: "Divers"
-    },
+    // Sources prioritaires (chargées immédiatement - seulement les plus importantes)
     "dealabs_hot": {
         nom: "Dealabs (Hot)",
         rss: "https://www.dealabs.com/rss/hot",
-        categorie: "Divers"
+        categorie: "Divers",
+        priorite: 1
     },
-    "hotukdeals_hot": {
-        nom: "HotUKDeals (Hot)",
-        rss: "https://www.hotukdeals.com/rss/hot",
-        categorie: "Divers"
-    },
-    "hotukdeals_deals": {
-        nom: "HotUKDeals (Deals)",
-        rss: "https://www.hotukdeals.com/rss/deals",
-        categorie: "Divers"
-    },
-    
-    // Électronique et Tech
     "dealabs_informatique": {
         nom: "Dealabs (Informatique)",
         rss: "https://www.dealabs.com/rss/groupe/informatique",
-        categorie: "Électronique"
+        categorie: "Électronique",
+        priorite: 1
     },
     "dealabs_telephonie": {
         nom: "Dealabs (Téléphonie)",
         rss: "https://www.dealabs.com/rss/groupe/telephonie",
-        categorie: "Électronique"
+        categorie: "Électronique",
+        priorite: 1
     },
+    "dealabs_electronique": {
+        nom: "Dealabs (Électronique)",
+        rss: "https://www.dealabs.com/rss/groupe/electronique",
+        categorie: "Électronique",
+        priorite: 1
+    },
+
+    // Sources secondaires diverses (chargées rapidement)
     "dealabs_jeux": {
-        nom: "Dealabs (Jeux Vidéo)",
+        nom: "Dealabs (Jeux)",
         rss: "https://www.dealabs.com/rss/groupe/jeux-video",
-        categorie: "Électronique"
-    },
-    "dealabs_photo": {
-        nom: "Dealabs (Photo & Vidéo)",
-        rss: "https://www.dealabs.com/rss/groupe/photo-et-video",
-        categorie: "Électronique"
-    },
-    
-    // Mode et Beauté
-    "dealabs_mode": {
-        nom: "Dealabs (Mode)",
-        rss: "https://www.dealabs.com/rss/groupe/vetements-et-accessoires",
-        categorie: "Vêtements"
-    },
-    "dealabs_chaussures": {
-        nom: "Dealabs (Chaussures)",
-        rss: "https://www.dealabs.com/rss/groupe/chaussures",
-        categorie: "Vêtements"
-    },
-    "dealabs_beaute": {
-        nom: "Dealabs (Beauté & Santé)",
-        rss: "https://www.dealabs.com/rss/groupe/beaute-et-sante",
-        categorie: "Beauté & Santé"
-    },
-    
-    // Maison et Jardin
-    "dealabs_maison": {
-        nom: "Dealabs (Maison)",
-        rss: "https://www.dealabs.com/rss/groupe/maison-et-jardin",
-        categorie: "Maison"
-    },
-    "dealabs_bricolage": {
-        nom: "Dealabs (Bricolage)",
-        rss: "https://www.dealabs.com/rss/groupe/bricolage-et-jardinage",
-        categorie: "Maison"
-    },
-    "dealabs_electromenager": {
-        nom: "Dealabs (Électroménager)",
-        rss: "https://www.dealabs.com/rss/groupe/electromenager",
-        categorie: "Maison"
-    },
-    
-    // Sports et Loisirs
-    "dealabs_sport": {
-        nom: "Dealabs (Sports)",
-        rss: "https://www.dealabs.com/rss/groupe/sports-et-loisirs",
-        categorie: "Sports & Loisirs"
+        categorie: "Électronique",
+        priorite: 2
     },
     "dealabs_voyage": {
         nom: "Dealabs (Voyages)",
         rss: "https://www.dealabs.com/rss/groupe/voyages",
-        categorie: "Voyages"
+        categorie: "Voyages",
+        priorite: 2
     },
-    "dealabs_auto": {
-        nom: "Dealabs (Auto & Moto)",
-        rss: "https://www.dealabs.com/rss/groupe/auto-et-moto",
-        categorie: "Auto & Moto"
+    "dealabs_mode": {
+        nom: "Dealabs (Mode)",
+        rss: "https://www.dealabs.com/rss/groupe/mode",
+        categorie: "Vêtements",
+        priorite: 2
     },
-    
-    // TV, Vidéo et Télécoms
-    "dealabs_tv": {
-        nom: "Dealabs (TV & Vidéo)",
-        rss: "https://www.dealabs.com/rss/groupe/tv-video",
-        categorie: "TV & Vidéo"
+    "dealabs_maison": {
+        nom: "Dealabs (Maison)",
+        rss: "https://www.dealabs.com/rss/groupe/maison",
+        categorie: "Maison",
+        priorite: 2
     },
-    "dealabs_telecom": {
-        nom: "Dealabs (Télécoms)",
-        rss: "https://www.dealabs.com/rss/groupe/telecommunications",
-        categorie: "Téléphonie/Mobile"
+    "clubic_bons_plans": {
+        nom: "Clubic Bons Plans",
+        rss: "https://www.clubic.com/rss/bons-plans.xml",
+        categorie: "Électronique",
+        priorite: 2
     },
-    
-    // Alimentation et Courses
-    "dealabs_alimentation": {
-        nom: "Dealabs (Alimentation)",
-        rss: "https://www.dealabs.com/rss/groupe/alimentation-et-boissons",
-        categorie: "Alimentation"
+    "lesbonsplans": {
+        nom: "Les Bons Plans",
+        rss: "https://www.lesbonsplans.fr/rss.xml",
+        categorie: "Divers",
+        priorite: 2
     },
-    "dealabs_epicerie": {
-        nom: "Dealabs (Courses)",
-        rss: "https://www.dealabs.com/rss/groupe/courses-et-supermarches",
-        categorie: "Alimentation"
+    "radins": {
+        nom: "Radins",
+        rss: "https://www.radins.com/rss.xml",
+        categorie: "Divers",
+        priorite: 2
     },
-    
-    // Livres, Culture et Enfants
-    "dealabs_livres": {
-        nom: "Dealabs (Livres & Culture)",
-        rss: "https://www.dealabs.com/rss/groupe/livres-et-culture",
-        categorie: "Culture & Livres"
+    "poulpeo": {
+        nom: "Poulpeo Offres",
+        rss: "https://www.poulpeo.com/rss/offres.xml",
+        categorie: "Divers",
+        priorite: 2
     },
-    "dealabs_enfants": {
-        nom: "Dealabs (Enfants & Bébé)",
-        rss: "https://www.dealabs.com/rss/groupe/enfants-et-bebe",
-        categorie: "Enfants & Bébé"
+    "frandroid_bons_plans": {
+        nom: "FrAndroid Bons Plans",
+        rss: "https://www.frandroid.com/bons-plans/feed",
+        categorie: "Électronique",
+        priorite: 2
+    },
+    "lesnumeriques_bons_plans": {
+        nom: "Les Numériques Bons Plans",
+        rss: "https://www.lesnumeriques.com/bons-plans/rss.xml",
+        categorie: "Électronique",
+        priorite: 2
+    },
+    "generation_nt_bons_plans": {
+        nom: "Generation NT Bons Plans",
+        rss: "https://www.generation-nt.com/rss.xml",
+        categorie: "Électronique",
+        priorite: 2
+    },
+    "journaldugeek_bons_plans": {
+        nom: "Journal du Geek Bons Plans",
+        rss: "https://www.journaldugeek.com/feed/",
+        categorie: "Électronique",
+        priorite: 2
     }
+
 };
 
 // Cache pour les offres
@@ -141,44 +111,126 @@ function delai(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Fonction pour charger les deals depuis RSS avec gestion des erreurs améliorée
-async function chargerDealsDepuisRSS(url) {
-    try {
-        // Utilisation d'un proxy CORS pour éviter les problèmes de cross-origin
-        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
-        const response = await fetch(proxyUrl);
-        
-        // Gérer les erreurs de limite de taux
-        if (response.status === 429) {
-            console.warn('Limite de taux atteinte pour:', url);
-            return [];
-        }
-        
-        if (!response.ok) {
-            console.warn(`Erreur HTTP ${response.status} pour:`, url);
-            return [];
-        }
-        
-        const data = await response.json();
+    // Fonction pour scraper le contenu complet d'un article Les Numériques
+    async function scraperArticleLesNumeriques(url) {
+        try {
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            const response = await fetch(proxyUrl);
+            if (!response.ok) return '';
 
-        if (data.status === 'ok' && data.items) {
-            return data.items.map(item => ({
-                titre: item.title || 'Titre non disponible',
-                description: (item.description || '').replace(/<[^>]*>/g, '').substring(0, 150) + '...',
-                prix: extrairePrix(item.description) || "Prix non spécifié",
-                image: extraireImage(item.description) || "https://via.placeholder.com/300x200?text=Deal",
-                lien: item.link || '#',
-                vendeur: item.author || "Marchand",
-                date: new Date(item.pubDate || Date.now()),
-                categorie: determinerCategorie((item.title || '') + ' ' + (item.description || ''))
-            }));
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Extraire le texte principal de l'article (balises <p> dans <article> ou <main>)
+            const article = doc.querySelector('article') || doc.querySelector('main') || doc.body;
+            const paragraphs = article.querySelectorAll('p');
+            let fullText = '';
+            paragraphs.forEach(p => {
+                fullText += p.textContent + ' ';
+            });
+
+            return fullText.trim();
+        } catch (error) {
+            console.warn(`Erreur lors du scraping de ${url}:`, error);
+            return '';
         }
-        return [];
-    } catch (error) {
-        console.error('Erreur lors du chargement des deals depuis:', url, error);
-        return [];
     }
-}
+
+    // Fonction pour charger les deals depuis RSS avec retry et gestion des erreurs améliorée
+    async function chargerDealsDepuisRSS(url, sourceName = '', tentativeMax = 3) {
+        for (let tentative = 1; tentative <= tentativeMax; tentative++) {
+            try {
+                // Utilisation d'un proxy CORS pour éviter les problèmes de cross-origin
+                const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+                const response = await fetch(proxyUrl, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                
+                // Gérer les erreurs de limite de taux avec retry plus rapide
+                if (response.status === 429) {
+                    console.warn(`Limite de taux atteinte pour: ${url} (tentative ${tentative}/${tentativeMax})`);
+                    if (tentative < tentativeMax) {
+                        const delaiRetry = tentative * 500; // Plus rapide : 0.5s, 1s, 1.5s
+                        console.log(`Retry dans ${delaiRetry/1000}s...`);
+                        await delai(delaiRetry);
+                        continue;
+                    } else {
+                        return [];
+                    }
+                }
+                
+                if (response.status === 500) {
+                    console.warn(`Erreur serveur 500 pour: ${url} (tentative ${tentative}/${tentativeMax})`);
+                    if (tentative < tentativeMax) {
+                        await delai(500 * tentative); // Délai plus rapide
+                        continue;
+                    } else {
+                        return [];
+                    }
+                }
+                
+                if (!response.ok) {
+                    console.warn(`Erreur HTTP ${response.status} pour: ${url}`);
+                    return [];
+                }
+                
+                const data = await response.json();
+
+                if (data.status === 'ok' && data.items) {
+                    const items = data.items.slice(0, 50);
+                    const deals = [];
+                    for (let i = 0; i < items.length; i++) {
+                        const item = items[i];
+                        let fullContent = item.content || item.description || '';
+
+                        // Scraping pour Les Numériques (limité aux 5 premiers items)
+                        if (sourceName.includes('Les Numériques') && i < 5) {
+                            console.log(`Scraping article Les Numériques: ${item.title}`);
+                            const articleText = await scraperArticleLesNumeriques(item.link);
+                            if (articleText) {
+                                fullContent += ' ' + articleText;
+                            }
+                            await delai(1000); // Délai entre scrapings pour éviter les limites
+                        }
+
+                        const description = fullContent.replace(/<[^>]*>/g, '').substring(0, 150) + '...';
+                        const priceText = (item.title || '') + ' ' + fullContent;
+                        deals.push({
+                            titre: item.title || 'Titre non disponible',
+                            description: description,
+                            prix: extrairePrix(priceText) || "Prix non spécifié",
+                            image: item.thumbnail || extraireImage(fullContent) || "https://via.placeholder.com/300x200?text=Deal",
+                            lien: item.link || '#',
+                            vendeur: item.author || "Marchand",
+                            date: new Date(item.pubDate || Date.now()),
+                            categorie: determinerCategorie((item.title || '') + ' ' + fullContent)
+                        });
+                    }
+                    return deals;
+                }
+                return [];
+                
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.warn(`Timeout pour: ${url} (tentative ${tentative}/${tentativeMax})`);
+                    if (tentative < tentativeMax) {
+                        await delai(500 * tentative);
+                        continue;
+                    } else {
+                        return [];
+                    }
+                }
+                console.error(`Erreur lors du chargement des deals depuis: ${url} (tentative ${tentative}/${tentativeMax})`, error);
+                if (tentative < tentativeMax) {
+                    await delai(500 * tentative);
+                }
+            }
+        }
+        
+        return []; // Retourner un tableau vide si toutes les tentatives échouent
+    }
 
 // Fonction pour extraire le pourcentage de réduction (améliorée)
 function extrairePourcentageReduction(texte) {
@@ -204,30 +256,99 @@ function extrairePourcentageReduction(texte) {
     return 0;
 }
 
-// Fonction pour extraire les prix avant/après (comme sur Amazon)
-function extrairePrixAvantApres(texte) {
-    // Patterns pour prix avant/après : "1499€ -> 949€" ou "de 1499€ à 949€"
-    const regexPrixComparaison = /(\d+[.,]?\d*)\s*€?\s*(?:->|à)\s*(\d+[.,]?\d*)\s*€?/gi;
-    const regexPrixBarre = /~~(\d+[.,]?\d*)~~\s*(\d+[.,]?\d*)/gi; // Prix barré
-    
-    let match = texte.match(regexPrixComparaison);
-    if (match) {
-        const prixAvant = match[0].match(/(\d+[.,]?\d*)/g);
-        if (prixAvant && prixAvant.length >= 2) {
-            return `${prixAvant[1]}€ (était ${prixAvant[0]}€)`;
+    // Fonction pour extraire les prix avant/après (comme sur Amazon)
+    function extrairePrixAvantApres(texte) {
+        // Patterns pour prix avant/après : "1499€ -> 949€" ou "de 1499€ à 949€"
+        const regexPrixComparaison = /(\d+[.,]?\d*)\s*€?\s*(?:->|à)\s*(\d+[.,]?\d*)\s*€?/gi;
+        const regexPrixBarre = /~~(\d+[.,]?\d*)~~\s*(\d+[.,]?\d*)/gi; // Prix barré
+        // Pattern pour prix space-separated (e.g., "199,99 € 349,99 €" - premier est le prix promo)
+        const regexPrixSpace = /(\d+[.,]?\d*)\s*€\s+(\d+[.,]?\d*)\s*€/gi;
+        // Pattern pour prix avec "à X €" (e.g., "à 189,99 €")
+        const regexPrixA = /à\s+(\d+[.,]?\d*)\s*€/gi;
+        // Nouveau pattern pour prix space-separated suivis de % (e.g., "405€ 567€ -29%")
+        const regexPrixSpacePourcent = /(\d+[.,]?\d*)\s*€\s+(\d+[.,]?\d*)\s*€\s*-?(\d+)%?/gi;
+        // Patterns français : "avant X€ maintenant Y€" ou "was X€ now Y€"
+        const regexAvantMaintenant = /(?:avant|was|était)\s+(\d+[.,]?\d*)\s*€?\s+(?:maintenant|now|est|à)\s+(\d+[.,]?\d*)\s*€?/gi;
+        // Pattern pour "de X€ à Y€" (assumant que Y est le prix final)
+        const regexDeAX = /de\s+(\d+[.,]?\d*)\s*€?\s+à\s+(\d+[.,]?\d*)\s*€?/gi;
+
+        let match = texte.match(regexPrixComparaison);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const avant = Math.max(parseFloat(prixMatch[0].replace(',', '.')), parseFloat(prixMatch[1].replace(',', '.')));
+                const apres = Math.min(parseFloat(prixMatch[0].replace(',', '.')), parseFloat(prixMatch[1].replace(',', '.')));
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
         }
-    }
-    
-    match = texte.match(regexPrixBarre);
-    if (match) {
-        const prixAvant = match[0].match(/(\d+[.,]?\d*)/g);
-        if (prixAvant && prixAvant.length >= 2) {
-            return `${prixAvant[1]}€ (était ${prixAvant[0]}€)`;
+
+        match = texte.match(regexPrixBarre);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const avant = parseFloat(prixMatch[0].replace(',', '.'));
+                const apres = parseFloat(prixMatch[1].replace(',', '.'));
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
         }
+
+        // Prix space-separated sans %
+        match = texte.match(regexPrixSpace);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const p1 = parseFloat(prixMatch[0].replace(',', '.'));
+                const p2 = parseFloat(prixMatch[1].replace(',', '.'));
+                const apres = Math.min(p1, p2);
+                const avant = Math.max(p1, p2);
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
+        }
+
+        // Prix avec "à X €"
+        match = texte.match(regexPrixA);
+        if (match) {
+            const prix = match[0].match(/(\d+[.,]?\d*)/g)[0];
+            return `${parseFloat(prix.replace(',', '.')).toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€`;
+        }
+
+        // Nouveau: Prix space-separated avec %
+        match = texte.match(regexPrixSpacePourcent);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const p1 = parseFloat(prixMatch[0].replace(',', '.'));
+                const p2 = parseFloat(prixMatch[1].replace(',', '.'));
+                const apres = Math.min(p1, p2);
+                const avant = Math.max(p1, p2);
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
+        }
+
+        // Avant/maintenant patterns (updated to include "est" or "à")
+        match = texte.match(regexAvantMaintenant);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const avant = parseFloat(prixMatch[0].replace(',', '.'));
+                const apres = parseFloat(prixMatch[1].replace(',', '.'));
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
+        }
+
+        // De X€ à Y€ pattern
+        match = texte.match(regexDeAX);
+        if (match) {
+            const prixMatch = match[0].match(/(\d+[.,]?\d*)/g);
+            if (prixMatch && prixMatch.length >= 2) {
+                const avant = parseFloat(prixMatch[0].replace(',', '.'));
+                const apres = parseFloat(prixMatch[1].replace(',', '.'));
+                return `${apres.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${avant.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+            }
+        }
+
+        return null;
     }
-    
-    return null;
-}
 
 // Fonction pour filtrer les offres par pourcentage de réduction
 function filtrerParReduction(offres, pourcentageMin = 50) {
@@ -239,6 +360,28 @@ function filtrerParReduction(offres, pourcentageMin = 50) {
 
 // Fonction pour extraire le prix du texte (optimisée pour les réductions Amazon)
 function extrairePrix(texte) {
+    // D'abord chercher dans data-offer JSON (pour Affilizz et similaires)
+    const dataOfferMatch = texte.match(/data-offer\s*=\s*["'](\{[^"']*\})["']/i);
+    if (dataOfferMatch) {
+        try {
+            const dataOffer = JSON.parse(dataOfferMatch[1]);
+            if (dataOffer.price && dataOffer.crossedPrice) {
+                const price = parseFloat(dataOffer.price);
+                const crossed = parseFloat(dataOffer.crossedPrice);
+                if (!isNaN(price) && !isNaN(crossed) && crossed > price) {
+                    return `${price.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€ (était ${crossed.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€)`;
+                }
+            } else if (dataOffer.price) {
+                const price = parseFloat(dataOffer.price);
+                if (!isNaN(price)) {
+                    return `${price.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}€`;
+                }
+            }
+        } catch (e) {
+            console.warn('Erreur lors du parsing du JSON data-offer:', e);
+        }
+    }
+
     // D'abord chercher les prix avant/après
     const prixComparaison = extrairePrixAvantApres(texte);
     if (prixComparaison) {
@@ -255,12 +398,24 @@ function extrairePrix(texte) {
         }
     }
     
-    // Sinon chercher les prix normaux
-    const regexPrix = /[£€$]\s*\d+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?\s*[£€$]/gi;
+    // Sinon chercher les prix normaux (sélectionne le plus petit prix valide >0€ pour les deals)
+    const regexPrix = /\b(\d{1,3}(?:\s\d{3})*(?:[.,]\d{1,2})?)\s*[€£$]|\b[€£$]\s*(\d{1,3}(?:\s\d{3})*(?:[.,]\d{1,2})?)|\b(\d{1,3}(?:\s\d{3})*(?:[.,]\d{1,2})?)\s*(?:euros?|eur|€)/gi;
     const matches = texte.match(regexPrix);
     if (matches && matches.length > 0) {
-        let prix = matches[0].replace(/\s+/g, '').trim();
-        return prix;
+        let minPrix = null;
+        let minNum = Infinity;
+        matches.forEach(match => {
+            const originalMatch = match.replace(/\s+/g, ' ').trim(); // Formaté pour affichage
+            const clean = originalMatch.replace(/[€£$]|euros?|eur/gi, '').replace(/\s/g, '').replace(',', '.');
+            const num = parseFloat(clean);
+            if (num > 0 && num < minNum) {
+                minNum = num;
+                minPrix = originalMatch;
+            }
+        });
+        if (minPrix) {
+            return minPrix;
+        }
     }
     return "Prix non spécifié";
 }
@@ -354,7 +509,7 @@ function determinerCategorie(texte) {
     return "Divers";
 }
 
-// Fonction pour charger toutes les offres
+// Fonction pour charger toutes les offres avec gestion des limites de taux
 async function chargerToutesLesOffres() {
     const maintenant = new Date();
 
@@ -380,23 +535,27 @@ async function chargerToutesLesOffres() {
         "Divers": []
     };
 
-    // Charger depuis toutes les sources RSS avec délais
+    // Charger depuis toutes les sources RSS par priorité avec délais plus longs
     let sourceIndex = 0;
-    for (const [sourceId, source] of Object.entries(sourcesDeals)) {
+    const sources = Object.entries(sourcesDeals);
+    
+    // Séparer les sources par priorité
+    const sourcesPriorite1 = sources.filter(([id, source]) => source.priorite === 1);
+    const sourcesPriorite2 = sources.filter(([id, source]) => source.priorite === 2);
+    
+    // Charger d'abord les sources prioritaires en parallèle avec stagger (500ms entre chaque)
+    const promessesPriorite = sourcesPriorite1.map(async ([sourceId, source], index) => {
         try {
-            console.log(`Chargement de ${source.nom}...`);
-            
-            // Ajouter un délai entre chaque requête (sauf pour la première)
-            if (sourceIndex > 0) {
-                await delai(500); // Réduire le délai à 0.5 secondes
+            if (index > 0) {
+                await delai(500); // Stagger de 500ms
             }
-            
-            const deals = await chargerDealsDepuisRSS(source.rss);
-            
+            console.log(`🔥 Chargement prioritaire: ${source.nom}... (${index + 1}/${sourcesPriorite1.length})`);
+
+            const deals = await chargerDealsDepuisRSS(source.rss, source.nom);
+
             deals.forEach(deal => {
-                // Utiliser la catégorie définie dans la source, ou déterminer automatiquement
                 const categorie = source.categorie !== "Divers" ? source.categorie : determinerCategorie(deal.titre + ' ' + deal.description);
-                
+
                 if (offresParCategorie[categorie]) {
                     deal.categorie = categorie;
                     deal.source = source.nom;
@@ -407,23 +566,77 @@ async function chargerToutesLesOffres() {
                     offresParCategorie["Divers"].push(deal);
                 }
             });
-            
-            sourceIndex++;
+
+            return deals;
         } catch (error) {
-            console.error(`Erreur chargement ${source.nom}:`, error);
+            console.error(`❌ Erreur lors du chargement de ${source.nom}:`, error);
+            return [];
+        }
+    });
+
+    await Promise.all(promessesPriorite);
+    sourceIndex = sourcesPriorite1.length;
+
+    // Pause courte avant les sources secondaires
+    if (sourcesPriorite2.length > 0) {
+        console.log('⏳ Pause de 1 seconde avant sources secondaires...');
+        await delai(1000);
+    }
+
+    // Charger ensuite les sources secondaires rapidement (séquentiel pour éviter les limites)
+    for (const [sourceId, source] of sourcesPriorite2) {
+        try {
+            console.log(`⭐ Chargement secondaire: ${source.nom}... (${sourceIndex + 1}/${sources.length})`);
+
+            await delai(1000); // Réduit à 1 seconde entre sources secondaires
+
+            const deals = await chargerDealsDepuisRSS(source.rss, source.nom);
+
+            deals.forEach(deal => {
+                const categorie = source.categorie !== "Divers" ? source.categorie : determinerCategorie(deal.titre + ' ' + deal.description);
+
+                if (offresParCategorie[categorie]) {
+                    deal.categorie = categorie;
+                    deal.source = source.nom;
+                    offresParCategorie[categorie].push(deal);
+                } else {
+                    deal.categorie = "Divers";
+                    deal.source = source.nom;
+                    offresParCategorie["Divers"].push(deal);
+                }
+            });
+
+            sourceIndex++;
+
+        } catch (error) {
+            console.warn(`⚠️ Source secondaire échouée ${source.nom}:`, error);
+            sourceIndex++;
         }
     }
 
-    // Trier par date (plus récent en premier) et limiter à 75 par catégorie
+    // Trier par date (plus récent en premier) et augmenter la limite par catégorie
     Object.keys(offresParCategorie).forEach(categorie => {
         offresParCategorie[categorie] = offresParCategorie[categorie]
             .sort((a, b) => (b.date || new Date()) - (a.date || new Date()))
-            .slice(0, 75);
+            .slice(0, 500); // Augmenté à 500 offres par catégorie pour garder plus d'offres
     });
 
+    // Mettre en cache et retourner les données
     offresCache = offresParCategorie;
     dernierChargement = maintenant;
 
+    // Calculer et afficher le total des offres chargées
+    const totalOffres = Object.values(offresParCategorie).reduce((total, cat) => total + cat.length, 0);
+    console.log(`🎯 TOTAL: ${totalOffres} offres chargées!`);
+    
+    // Détail par catégorie
+    Object.entries(offresParCategorie).forEach(([categorie, offres]) => {
+        if (offres.length > 0) {
+            console.log(`📊 ${categorie}: ${offres.length} offres`);
+        }
+    });
+
+    console.log('✅ Chargement terminé avec succès!');
     return offresParCategorie;
 }
 
@@ -442,6 +655,12 @@ function initialiserDropdownCategories() {
     // Vider les options existantes (sauf "Toutes les catégories")
     categorySelect.innerHTML = '<option value="">Toutes les catégories</option>';
     
+    // Vérifier que offresData existe et n'est pas null/undefined
+    if (!offresData || typeof offresData !== 'object') {
+        console.warn('offresData n\'est pas encore initialisé');
+        return;
+    }
+    
     // Ajouter les catégories disponibles
     Object.keys(offresData).forEach(categorie => {
         if (offresData[categorie] && offresData[categorie].length > 0) {
@@ -452,37 +671,44 @@ function initialiserDropdownCategories() {
         }
     });
     
-    // Événement de changement de catégorie
-    categorySelect.addEventListener('change', (e) => {
-        categorieActuelle = e.target.value || null;
-        pageActuelle = 1; // Retour à la première page lors du changement de catégorie
-        afficherOffres();
-    });
+    // Événement de changement de catégorie (uniquement si pas déjà attaché)
+    if (!categorySelect.hasAttribute('data-listener-attached')) {
+        categorySelect.addEventListener('change', (e) => {
+            categorieActuelle = e.target.value || null;
+            pageActuelle = 1; // Retour à la première page lors du changement de catégorie
+            afficherOffres();
+        });
+        categorySelect.setAttribute('data-listener-attached', 'true');
+    }
 }
 
 // Fonction pour initialiser la recherche
 function initialiserRecherche() {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
-    
+    const refreshButton = document.getElementById('refresh-button');
+
     function effectuerRecherche() {
         motRecherche = searchInput.value.toLowerCase().trim();
         pageActuelle = 1; // Retour à la première page lors d'une nouvelle recherche
         afficherOffres();
     }
-    
+
     // Recherche en temps réel
     searchInput.addEventListener('input', effectuerRecherche);
-    
+
     // Recherche au clic
     searchButton.addEventListener('click', effectuerRecherche);
-    
+
     // Recherche avec la touche Entrée
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             effectuerRecherche();
         }
     });
+
+    // Actualisation des offres
+    refreshButton.addEventListener('click', actualiserOffres);
 }
 
 // Fonction pour initialiser la pagination
@@ -617,8 +843,16 @@ async function afficherOffres() {
 
     try {
         // Charger les offres si nécessaire
-        if (Object.keys(offresData).length === 0) {
+        if (!offresData || Object.keys(offresData).length === 0) {
             offresData = await chargerToutesLesOffres();
+            
+            // Vérifier que les données ont bien été chargées
+            if (!offresData || typeof offresData !== 'object') {
+                console.error('Échec du chargement des données');
+                offresContainer.innerHTML = '<div class="loading">Erreur : Impossible de charger les offres</div>';
+                return;
+            }
+            
             initialiserDropdownCategories(); // Initialiser le dropdown après le chargement
         }
 
@@ -630,10 +864,14 @@ async function afficherOffres() {
         if (categorieActuelle) {
             offresAAfficher = offresData[categorieActuelle] || [];
         } else {
-            // Afficher toutes les offres
-            Object.values(offresData).forEach(offres => {
-                offresAAfficher = offresAAfficher.concat(offres);
-            });
+            // Afficher toutes les offres - vérifier que offresData existe
+            if (offresData && typeof offresData === 'object') {
+                Object.values(offresData).forEach(offres => {
+                    if (Array.isArray(offres)) {
+                        offresAAfficher = offresAAfficher.concat(offres);
+                    }
+                });
+            }
         }
 
         // Filtrer par recherche
@@ -756,6 +994,19 @@ function creerElementOffre(offre) {
     `;
 
     return div;
+}
+
+// Fonction pour actualiser les offres
+async function actualiserOffres() {
+    offresCache = {};
+    dernierChargement = null;
+    offresData = {};
+    categorieActuelle = null;
+    motRecherche = '';
+    pageActuelle = 1;
+    document.getElementById('search-input').value = '';
+    document.getElementById('category-select').value = '';
+    await afficherOffres();
 }
 
 // Initialisation de l'application
